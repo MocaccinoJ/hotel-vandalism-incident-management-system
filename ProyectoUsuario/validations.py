@@ -1,4 +1,9 @@
 from controlador.dto_user import UserDTO
+"""TODO: Cambiar la estructura de la importaciòn"""
+
+from validationsCliente import listarClientes
+
+from menu import menu
 
 
 def listAll():
@@ -79,23 +84,14 @@ def validarLogin():
     return resultado
 
 
-def menu():
-    print("1. Listar Usuarios")
-    print("2. Agregar Usuario")
-    print("3. Eliminar Usuario")
-    print("4. Actualizar Usuario")
-    print("5. Buscar Usuario")
-    print("6. Salir")
-    opc = int( input("Ingrese una opción : "))
-    return opc
-
 ### para llegar al menu primero hay que loguearse
 
 """TODO: Separar ejecución de menú del archivo de validaciones."""
 def inicial():
 
     while True:
-        opc = menu()
+        """opc = menu()"""
+        opc=menu.menu()
         if opc == 1:
             listAll()
         elif opc == 2:
@@ -106,6 +102,12 @@ def inicial():
             validateUpdateUser()
         elif opc == 5:
             validateFindUser()
-        else:
+        elif opc == 101:
+            print(" ")
+            print("¡¡HAY QUE CONSRUIR EL FUNCIONAMIENTO DE LISTAR CLIENTES!!")
+       
+            listarClientes()     
+            
+        elif opc == 50:
             break
 

@@ -9,6 +9,7 @@ while intentos <= 3:
         print("MENU: ")
         resu = validarLogin()
         if resu is not None:
+            """TODO: ¡¡Saludar personalmente!!"""
             print(f"Bienvenido(a) Sr(a). : ")
             inicial()
             break
@@ -24,6 +25,9 @@ if intentos == 4:
 
 
 """
+TODO: -Modificar la contraseña y/o el nombre de usuario
+
+
 from validations import inicial, validarLogin
 
 

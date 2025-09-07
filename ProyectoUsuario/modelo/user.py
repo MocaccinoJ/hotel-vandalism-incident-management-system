@@ -1,5 +1,5 @@
 from datetime import datetime
-
+"""TODO: Terminar el encapsulamiento"""
 class User:
     def __init__(self, username, email="", password="", create_time=datetime.now()):
         self.__username = username
