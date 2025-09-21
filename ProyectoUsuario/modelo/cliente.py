@@ -1,7 +1,6 @@
 from modelo.persona import Persona
 
 """TODO: Definir cuales serán los atributos obligatorios"""
-"""TODO: PREGUNTA 1) para el profe ¿Está bien que los atributos heredados vayan en el constructor"""
 class Cliente(Persona):
     def __init__(
             self, 

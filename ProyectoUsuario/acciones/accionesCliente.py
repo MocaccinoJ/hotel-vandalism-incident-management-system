@@ -1,6 +1,6 @@
 from controlador.dto_cliente import ClienteDTO
 from validations.validationsCliente import validarNombre, validarDocumento, validarApellido, validarTipoDocumento, normalizarTexto, validarExistenciaCliente, confirmarAccion
-from modelo.cliente import Cliente
+# from modelo.cliente import Cliente
 
 def listarClientes():
     clientesEncontrados = ClienteDTO().listarClientes()
@@ -13,7 +13,7 @@ def agregarCliente():
     #TODO: Agregar la validación de ingreso de datos y existencia de cliente
     try:
         nombre = normalizarTexto(input("Ingrese el nombre del cliente: "))
-        while not validarNombre(nombre): #todo: crear función para validar el nombre / normalizar datos todos min o mayus
+        while not validarNombre(nombre):
             print("Nombre inválido. Intente nuevamente")
             nombre = normalizarTexto(input("Ingrese el nombre del cliente: "))
 
