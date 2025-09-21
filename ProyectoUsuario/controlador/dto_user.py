@@ -11,7 +11,12 @@ class UserDTO:
         lista = []
         if resultado is not None:
             for u in resultado:
-                usuario = User(username=u[0], email=u[1], password=u[2], create_time=u[3])
+                usuario = User(
+                    username=u[0], 
+                    email=u[1], 
+                    password=u[2], 
+                    create_time=u[3]
+                )
                 lista.append(usuario)
         return lista
 

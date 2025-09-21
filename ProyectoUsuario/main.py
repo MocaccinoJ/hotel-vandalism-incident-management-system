@@ -1,4 +1,4 @@
-from validations import inicial, validarLogin
+from validations1 import inicial, validarLogin
 
 
 ##### login

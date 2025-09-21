@@ -1,11 +1,11 @@
 from controlador.dto_user import UserDTO
 """TODO: Cambiar la estructura de la importaciòn"""
 
-from validationsCliente import listarClientes
+from acciones.accionesCliente import listarClientes, agregarCliente, actualizarCliente, eliminarCliente
 
 from menu import menu
 
-
+# LIST_USERS
 def listAll():
     print("Listado de Usuarios")
     resultado = UserDTO().listarUsuarios()
@@ -59,6 +59,7 @@ def validateUpdateUser():
     else:
         print("Usuario No encontrado")
 def validateAddUser():
+    # Pequeña validacio de ingreso de datos
     username = input("Ingrese nombre de usuario a incorporar: ")
     if len(username) == 0:
         print("Debe ingresar un nombre de usuario")
@@ -103,11 +104,17 @@ def inicial():
         elif opc == 5:
             validateFindUser()
         elif opc == 101:
-            print(" ")
-            print("¡¡HAY QUE CONSRUIR EL FUNCIONAMIENTO DE LISTAR CLIENTES!!")
-       
+            print(" ")       
             listarClientes()     
-            
+        elif opc == 102:
+            print(" ")
+            agregarCliente()
+        elif opc == 103:
+            print(" ")
+            actualizarCliente()
+        elif opc == 104:
+            print(" ")
+            eliminarCliente()         
         elif opc == 50:
             break
 

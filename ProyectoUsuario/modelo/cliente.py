@@ -15,11 +15,12 @@ class Cliente(Persona):
         self.__documento=documento
         self.__tipoDocumento=tipoDocumento
 
+    def __str__(self):
+        return f"Nombre: {self.getNombre()} \n Apellido: {self.getApellido()} \n Dirección: {self.getDireccion()} \n Documento: {self.getDocumento()} \n Tipo Documento: {self.getTipoDocumento()}"
+
     def getDocumento(self):
         return self.__documento
     
     def getTipoDocumento(self):
         return self.__tipoDocumento
     
-    def __str__(self):
-        return f"{super().__str__()} | Documento: {self.__documento} ({self.__tipoDocumento})"

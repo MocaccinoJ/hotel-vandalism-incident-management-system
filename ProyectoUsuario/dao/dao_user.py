@@ -12,7 +12,6 @@ class daoUser:
         return self.__conn
 
     def listarUsuarios(self):
-
         c = self.getConex()
         result = None
         try:
@@ -32,6 +31,7 @@ class daoUser:
         c = self.getConex()
 
         try:
+            # TODO: Eliminar print
             print("LLEGAMOS CARALLHOOOOOOOOOO CABALLOO!")
             cursor = c.getConex().cursor()
             """El valor -%s- es el que se le pasa en el cursor 'user.username' en este ejemplo.'"""
