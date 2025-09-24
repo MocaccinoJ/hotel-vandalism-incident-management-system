@@ -6,21 +6,17 @@ class HabitacionDTO:
         """TODO: CAMBIAR ESTRUCTURA DE TRASPASO DE INFORMACIÓN PARA MEJOR LECTURA"""
         daohabitacion = daoHabitacion();
         habitaciones = daohabitacion.listarHabitaciones()
-        print("Habitaciones: ",habitaciones)
         
         lista_habitaciones = []
         if habitaciones is not None:
             for habitacion in habitaciones:
-                #TODO: Eliminar print
-                print("Habitación: ",habitacion)
                 habitacion = Habitacion(
                     numero=habitacion[0], 
                     precio=habitacion[1], 
                     disponible=habitacion[2]
                 )
                 lista_habitaciones.append(habitacion)
-        #TODO: Eliminar print 
-        print("LISTA: ",lista_habitaciones)
+
         return lista_habitaciones;
     
     def buscarHabitacion(self, numero):
@@ -48,7 +44,6 @@ class HabitacionDTO:
 
     def eliminarHabitacion(self, numero):
         habitacion = Habitacion(numero = numero)
-        print("CLIENTE: ",habitacion)
         daohabitacion = daoHabitacion()
         
         habitacionEliminada = daohabitacion.eliminarHabitacion(habitacion)

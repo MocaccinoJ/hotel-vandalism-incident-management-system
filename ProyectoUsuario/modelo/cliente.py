@@ -1,8 +1,8 @@
 from modelo.persona import Persona
 
-"""TODO: Definir cuales serán los atributos obligatorios"""
+
 class Cliente(Persona):
-    def __init__(
+    def init(
             self, 
             nombre="", 
             apellido="", 
@@ -10,16 +10,23 @@ class Cliente(Persona):
             documento="", 
             tipoDocumento=""
         ):
-        super().__init__(nombre, apellido, direccion)
-        self.__documento=documento
-        self.__tipoDocumento=tipoDocumento
+        super().init(nombre, apellido, direccion)
+        self.__documento = documento
+        self.__tipoDocumento = tipoDocumento
 
-    def __str__(self):
-        return f"Nombre: {self.getNombre()} \n Apellido: {self.getApellido()} \n Dirección: {self.getDireccion()} \n Documento: {self.getDocumento()} \n Tipo Documento: {self.getTipoDocumento()}"
+    def str(self):
+        return f"Nombre: {self.getNombre()} \nApellido: {self.getApellido()} \nDirección: {self.getDireccion()} \nDocumento: {self.getDocumento()} \nTipo Documento: {self.getTipoDocumento()}"
 
+    # Getters
     def getDocumento(self):
         return self.__documento
-    
+
     def getTipoDocumento(self):
         return self.__tipoDocumento
-    
+
+    # Setters
+    def setDocumento(self, documento):
+        self.__documento = documento
+
+    def setTipoDocumento(self, tipoDocumento):
+        self.__tipoDocumento = tipoDocumento

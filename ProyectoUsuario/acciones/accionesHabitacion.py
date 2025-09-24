@@ -5,14 +5,20 @@ def listarHabitaciones():
     habitacionesEncontradas = HabitacionDTO().listarHabitaciones()
     if len(habitacionesEncontradas) > 0:
         for habitacion in habitacionesEncontradas:
-            print(habitacion)
-        else:
-            print("¡No hay resultados!")
+            numero = habitacion.getNumero()
+            disponible = "Sí" if habitacion.getDisponible() else "No"
+            precio = habitacion.getPrecio()
+            print("HABITACION ACCIONES:\n",
+                  f"Número: {numero}\n",
+                  f"Precio: {precio}\n",
+                  f"Disponible: {disponible}")
+
+            
 def agregarHabitacion():
     #TODO: Agregar la validación de ingreso de datos y existencia de habitación
     try:
         numero = input("Ingrese el número de la habitación: ")
-        while not validarNumero(numero):
+        while not validarNumero(numero) or not validarExistenciaHabitacion(numero):
             print("Número inválido. Intente nuevamente")
             numero = input("Ingrese el nombre de la habitación: ")
 
@@ -22,13 +28,15 @@ def agregarHabitacion():
             print("Apellido inválido. Intente nuevamente")
             precio = input("Ingrese el precio de la habitación: ")
 
-        disponible = input("Indique si la habitación está ocupada (s/n): ")
+        disponible = normalizarTexto(input("Indique si la habitación está ocupada (s/n): "))
         while not validarDisponible(disponible):
             print("¡Ingrese valor válido!")
-            disponible = input("Indique si la habitación está ocupada (s/n): ")
+            disponible = normalizarTexto(input("Indique si la habitación está ocupada (s/n): "))
+        # Convertir valor ingresado a booleano para la base de datos
+        disponible_bool = True if disponible == 's' else False
             
         # TODO: Mostrar mensaje de confirmación de agregado a la base de datos
-        habitacionCreada = HabitacionDTO().agregarHabitacion(numero, precio, disponible)
+        habitacionCreada = HabitacionDTO().agregarHabitacion(numero, precio, disponible_bool)
         if habitacionCreada:
             print(" ")
             print("!Habitación creada correctamente!")
@@ -51,7 +59,7 @@ def actualizarHabitacion():
         if habitacion is None:
             return  # Salir si no existe
         
-        # Datos actuales de la ´habitación
+        # Datos actuales de la habitación
         print(habitacion)
 
         # Actualización condicional de cada campo
@@ -75,16 +83,18 @@ def actualizarHabitacion():
         # TODO: que el usuario ingrese s/n y se envíe un verdadero si es s y un falso si es n
         disponible = habitacion.getDisponible()
         if confirmarAccion("¿Desea modificar si está disponible? (s/n): "):
-            nuevoDisponible = input("Ingrese el nuevo estado de disponibilidad: ")
+            nuevoDisponible = normalizarTexto(input("Ingrese el nuevo estado de disponibilidad: "))
             while not validarDisponible(nuevoDisponible):
                 print("Precio inválido. Intente nuevamente.")
-                nuevoDisponible = input("Ingrese el nuevo estado de disponibilidad: ")
+                nuevoDisponible = normalizarTexto(input("Ingrese el nuevo estado de disponibilidad: "))
             disponible = nuevoDisponible
+            # Convertir valor ingresado a booleano para la base de datos
+            disponible_bool = True if disponible == 's' else False
             
         #Enviar información al DTO
         # TODO: Eliminar print
         print("HOLA SI ENVIAR INFORMACION AL DTO")
-        habitacionActualizada = HabitacionDTO().actualizarHabitacion(numero, precio, disponible)
+        habitacionActualizada = HabitacionDTO().actualizarHabitacion(numero, precio, disponible_bool)
         if habitacionActualizada:
             print("Habitación actualizada correctamente.")
 
@@ -105,7 +115,7 @@ def eliminarHabitacion():
         if habitacion is None:
             return # Salir si no existe (TODO:Cuestionable)
         
-        mensaje="¿Está seguro que desea eliminar este cliente? (s/n): "
+        mensaje="¿Está seguro que desea eliminar este Habitación? (s/n): "
         if confirmarAccion(mensaje):
             habitacionEliminada = HabitacionDTO().eliminarHabitacion(numero)
 

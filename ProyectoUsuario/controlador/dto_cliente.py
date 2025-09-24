@@ -6,11 +6,10 @@ class ClienteDTO:
         """TODO: CAMBIAR ESTRUCTURA DE TRASPASO DE INFORMACIÓN PARA MEJOR LECTURA"""
         daocliente = daoCliente();
         clientes = daocliente.listarClientes()
-        print("CLIENTES: ",clientes)
         lista = []
         if clientes is not None:
             for cliente in clientes:
-                print("CLIENTE: ",cliente)
+                # print("CLIENTE: ",cliente)
                 cliente = Cliente(
                     nombre=cliente[0], 
                     apellido=cliente[1], 
@@ -19,7 +18,6 @@ class ClienteDTO:
                     tipoDocumento=cliente[4]
                 )
                 lista.append(cliente)
-        print("LISTA: ",lista)
         return lista;
     
     def buscarCliente(self, documento):
@@ -41,7 +39,6 @@ class ClienteDTO:
     def agregarCliente(self, nombre, apellido, direccion, documento, tipoDocumento):
         cliente = Cliente(nombre = nombre, apellido = apellido, direccion = direccion, documento=documento, tipoDocumento=tipoDocumento)
         
-        print("HOLA!")
         print(cliente)
         return daoCliente().agregarCliente(cliente)
     
@@ -49,14 +46,11 @@ class ClienteDTO:
         cliente = Cliente(nombre = nombre, apellido = apellido, direccion = direccion, documento = documento, tipoDocumento = tipoDocumento)
         daocliente = daoCliente()
         clienteActualizado=daocliente.actualizarCliente(cliente)
-
-        print("CLIENTE ACTUALIZADO: ",clienteActualizado)
+        # print("CLIENTE ACTUALIZADO: ",clienteActualizado)
 
     def eliminarCliente(self, documento):
         cliente = Cliente(documento=documento)
         print("CLIENTE: ",cliente)
         daocliente = daoCliente()
-        
         clienteEliminado = daocliente.eliminarCliente(cliente)
-        
         return clienteEliminado

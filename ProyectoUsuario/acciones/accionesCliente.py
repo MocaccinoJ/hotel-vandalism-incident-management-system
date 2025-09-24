@@ -42,7 +42,6 @@ def agregarCliente():
             print(" ")
         if not clienteCreado:
             print("¡No se pudo agregar el cliente!")
-
         # TODO: Mostrar mensaje de confirmación de agregado a la base de datos
     except Exception as ex:
         print("¡Ha ocurrido un error!", ex)
@@ -121,3 +120,4 @@ def eliminarCliente():
 
     except Exception as ex:
         print("¡Ha ocurrido un error! ", ex)
+    # TODO: Buscar un cliente

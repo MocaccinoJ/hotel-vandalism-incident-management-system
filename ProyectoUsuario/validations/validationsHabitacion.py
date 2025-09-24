@@ -27,16 +27,15 @@ def validarDisponible(disponible):
 
 def normalizarTexto(texto):
     return texto.strip().lower()
-
+# TODO: PROBAR
 def validarExistenciaHabitacion(numero):
     habitacion = HabitacionDTO().buscarHabitacion(numero)
     if habitacion is not None:
-        print("¡Habitación encontrada!")
-        print(habitacion)
-        return habitacion
+        print("¡Habitación ya existe!")
+        return False
     else:
         print("¡Habitación no encontrado!")
-        return None
+        return True
 
 def confirmarAccion(mensaje="¿Desea continuar? (s/n): "):
     respuesta = input(mensaje).strip().lower()

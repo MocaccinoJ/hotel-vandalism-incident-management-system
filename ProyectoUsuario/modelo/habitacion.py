@@ -11,7 +11,7 @@ class Habitacion():
         self.__disponible = disponible
 
     def __str__(self):
-        return f"Nombre: {self.getNombre()} \n Apellido: {self.getApellido()} \n Dirección: {self.getDireccion()} \n Documento: {self.getDocumento()} \n Tipo Documento: {self.getTipoDocumento()}"
+        return f"Número: {self.getNumero()} \n Precio: {self.getPrecio()} \n Disponible: {self.getDisponible()}"
 
     def getNumero(self):
         return self.__numero

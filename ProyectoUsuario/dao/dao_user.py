@@ -16,100 +16,117 @@ class daoUser:
         result = None
         try:
             cursor = c.getConex().cursor()
-            cursor.execute("select username, email, password, create_time from user")
+            cursor.execute("SELECT username, email, password, create_time FROM user")
             result = cursor.fetchall()
         except Exception as ex:
-            print(ex)
+            print("¡Ha ocurrido un error! ",ex)
         finally:
             c.closeConex()
-
         return result
 
     def buscarUsuario(self, user):
-        sql = "select username, email, password, create_time from user where username = %s"
+        sql = "SELECT username, email, password, create_time FROM user WHERE username = %s"
         resultado = None
         c = self.getConex()
 
         try:
-            # TODO: Eliminar print
-            print("LLEGAMOS CARALLHOOOOOOOOOO CABALLOO!")
+            username = user.getUsername()
             cursor = c.getConex().cursor()
-            """El valor -%s- es el que se le pasa en el cursor 'user.username' en este ejemplo.'"""
-            cursor.execute(sql, (user.username,))
-            #fetchone, rescata del curso una sola fila (tupla)
+            cursor.execute(sql, (username,))
             resultado = cursor.fetchone()
-            print('1) Resultado: ', resultado)
 
         except Exception as ex:
+            print("¡Ha ocurrido un error! ",ex)
             print(traceback.print_exc())
         finally:
             c.closeConex()
         return resultado
 
     def validarLogin(self,user):
-        sql = "select username from user where username = %s and password = %s"
+        sql = "SELECT username FROM user WHERE username = %s AND password = %s"
         resultado = None
         conn = self.getConex()
         try:
-            """TODO: REPASAR POR QUË LLAMAMOS 2 veces a getConex()"""
+            # TODO: Mètodo para encriptar y comparar contraseña encriptada
             cursor = conn.getConex().cursor()
-            print("dao_user.validarLogin() | ",cursor)
             cursor.execute(sql, (user.getUsername(), user.getPassword()))
             resultado = cursor.fetchone()
-            print("RESULTADO DAO USER: ",resultado)
+
         except Exception as ex:
+            print("¡Ha ocurrido un error! ",ex)
             print(traceback.print_exc())
         finally:
             conn.closeConex()
-        
         return resultado
+    
     def actualizarUsuario(self, user):
-        sql = "update user set email=%s, password = %s where username = %s"
+        sql = "UPDATE user SET email=%s, password = %s WHERE username = %s"
         c = self.getConex()
         mensaje = ""
         try:
+            email = user.getEmail()
+            password = password.getPassword()
+            username = user.getUsername()
+
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (user.email, user.password, user.username))
+            cursor.execute(sql, (email, password, username))
             c.getConex().commit()
             filas = cursor.rowcount
+
             if filas > 0:
                 mensaje ="Datos modificados satisfactoriamente"
             else:
                 mensaje="No se realizaron cambios"
         except Exception as ex:
+            print("¡Ha ocurrido un error! ",ex)
             print(traceback.print_exc())
             mensaje = "Problemas con la base de datos..vuelva a intentarlo"
         finally:
             c.closeConex()
         return mensaje
+    
     def eliminarUsuario(self, user):
-        sql = "delete from user  where username = %s"
+
+        sql = "DELETE FROM user WHERE username = %s"
         c = self.getConex()
         mensaje = ""
+            
         try:
+            username = user.getUsername()
+            print("Username recibido:", repr(username))  # Para verificar espacios
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (user.username,))
+            cursor.execute(sql, (username,))  # ← CORREGIDO
             c.getConex().commit()
+
             filas = cursor.rowcount
             if filas > 0:
-                mensaje ="Usuario eliminado satisfactoriamente"
+                mensaje = "Usuario eliminado satisfactoriamente"
             else:
-                mensaje="No se realizaron cambios"
+                mensaje = "No se realizaron cambios"
         except Exception as ex:
+            print("¡Ha ocurrido un error! ", ex)
             print(traceback.print_exc())
-            mensaje = "Problemas con la base de datos..vuelva a intentarlo"
+            mensaje = "Problemas con la base de datos. Vuelva a intentarlo"
         finally:
             c.closeConex()
         return mensaje
+
+    
     def agregarUsuario(self,user):
-        sql = "insert into user (username, email, password, create_time) values (%s,%s,%s,%s)"
+        sql = "INSERT INTO user (username, email, password, create_time) VALUES (%s,%s,%s,%s)"
         c = self.getConex()
         mensaje = ""
         try:
+            username = user.getUsername()
+            email = user.getEmail()
+            password = user.getPassword()
+            create_time = user.getCreateTime()
+
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (user.username,user.email, user.password,user.create_time))
+            cursor.execute(sql, (username, email, password, create_time))
             c.getConex().commit()
             filas = cursor.rowcount
+
             if filas > 0:
                 mensaje ="Datos agregados satisfactoriamente"
             else:
@@ -120,6 +137,3 @@ class daoUser:
         finally:
             c.closeConex()
         return mensaje
-
-
-

@@ -37,7 +37,7 @@ def validaDelUser():
         print("Datos --> ", resu)
         respuesta = input("Esta seguro de la eliminación [s/n]: ") #crear función para validar respuesta
         if respuesta == "s":
-            print(UserDTO().eliminarUsuario(username))
+            print("Ay: ",UserDTO().eliminarUsuario(resu.getUsername()))
 
     else:
         print("Usuario No encontrado")
