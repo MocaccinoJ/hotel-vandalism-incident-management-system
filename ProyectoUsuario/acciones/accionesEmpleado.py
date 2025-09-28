@@ -4,18 +4,10 @@ from validations.validationsEmpleado import *
 def listarEmpleados():
     empleadosEncontrados = EmpleadoDTO().listarEmpleados()
     if len(empleadosEncontrados) > 0:
+        print("-- Lista de Empleados --")
         for empleado in empleadosEncontrados:
             print(empleado)
-    
-        # print("\n========== LISTADO DE EMPLEADOS ==========")
-        # for i, e in enumerate(empleados, start=1):
-        #     print(f"\nEmpleado {i}")
-        #     print(f"  Nombre: {e.getNombre()}")
-        #     print(f"  Apellido: {e.getApellido()}")
-        #     print(f"  Dirección: {e.getDireccion()}")
-        #     print(f"  Código: {e.getCodigo()}")
-        #     print(f"  Sueldo: {e.getSueldo():.2f}")
-        # print("==========================================")
+            print(" ")
     else:
         print("¡No hay resultados!")
     

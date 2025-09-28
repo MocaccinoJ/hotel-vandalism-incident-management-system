@@ -1,4 +1,4 @@
-from acciones.accionesUsuario import listAll, validateAddUser, validaDelUser, validateUpdateUser, validateFindUser
+from acciones.accionesUsuario import listarUsuarios, agregarUsuario, validaDelUser, validateUpdateUser, validateFindUser
 from acciones.accionesCliente import listarClientes, agregarCliente, actualizarCliente, eliminarCliente
 from acciones.accionesHabitacion import listarHabitaciones, agregarHabitacion, actualizarHabitacion, eliminarHabitacion
 from acciones.accionesEmpleado import listarEmpleados, agregarEmpleado, actualizarEmpleado, eliminarEmpleado
@@ -11,9 +11,9 @@ def inicial():
     while True:
         opc=menu()
         if opc == 1:
-            listAll()
+            listarUsuarios()
         elif opc == 2:
-            validateAddUser()
+            agregarUsuario()
         elif opc == 3:
             validaDelUser()
         elif opc == 4:
@@ -69,25 +69,19 @@ def menu():
     print("4. Actualizar Usuario")
     print("5. Buscar Usuario")
     
-    # Menú para clientes
     print("6. Opciones de Clientes")
-    # TODO: Menú para empleados
-    # Menú para Habitaciones
-    # PREGUNTA: ¿Es a través de empleados que se debería hacer la modificación?
     print("7. Opciones de Habitación")
-    print("8. Opciones de Reservas")  # nueva opción
-
+    print("8. Opciones de Reservas")
     print("9. Opciones de Empleados")
+
     print("50. Salir")
     opc = int( input("Ingrese una opción : "))
 
-    
     if(opc == 6): opc = menuClientes()
     if(opc == 7): opc = menuHabitacion()
     # if(opc == 8): opc = menuReservas()
     if(opc == 9): opc = menuEmpleado()
 
-    print("Valor de la opc sistema clientes: ", opc)
     return opc
 
 # Las opciones del menú de clientes serán con valores 100
@@ -144,7 +138,7 @@ def menuEmpleado():
 
     totalOpciones = 4;
     opc = int(input("Ingrese una Opción: "))
-    print("menu.menuClientes() opc:", opc)
+
     opc_usuario = validarOpcion(opc, totalOpciones)
 
     if opc_usuario == 1: opc=301

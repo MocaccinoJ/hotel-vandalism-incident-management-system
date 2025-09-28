@@ -1,18 +1,44 @@
 """TODO: Cambiar la estructura de la importaciòn"""
 from controlador.dto_user import UserDTO
+from validations.validationsUsers import confirmarAccion, normalizarTexto, validarUsername, validarEmail
 # from acciones.accionesCliente import listarClientes, agregarCliente, actualizarCliente, eliminarCliente
 
-# from menu import menu
 
-# LIST_USERS
-def listAll():
-    print("Listado de Usuarios")
-    resultado = UserDTO().listarUsuarios()
-    if len(resultado) > 0:
-        for u in resultado:
-            print(u)
+def listarUsuarios():
+    usuariosEncontrados = UserDTO().listarUsuarios()
+    if len(usuariosEncontrados) > 0:
+        print("-- Lista de Usuarios --")
+        for usuario in usuariosEncontrados:
+            print(usuario)
+            print(" ")
     else:
-        print("no hay resultados")
+        print("¡No hay resultados!")
+
+    print("\nPresione ENTER para volver al menú...")
+    input()
+
+def agregarUsuario():
+    username = normalizarTexto(input("Ingrese nombre de usuario a incorporar: "))
+    while not validarUsername: username = normalizarTexto(input("Usuario inválido. Intente nuevamente: "))
+
+    email = normalizarTexto(input("Ingrese Email a incorporar: "))
+    while not validarEmail: email = normalizarTexto(input("Error. Intente nuevamente: "))
+
+    password = input("Ingrese su contraseña: ")
+
+
+    #trae un objeto usuario
+    resu = UserDTO().buscarUsuario(username)
+    if resu is not None:
+        """desplegamos el usuario, por medio de __str()__
+        de la clase Usuario, que se encuentra en el 
+        paquete modelo"""
+        print("Datos existentes--> ", resu)
+    else:
+        #Ingresamos el nuevo usuario
+        email = input("Ingrese email : ") #crear función para validar email
+        clave = input("Ingrese clave : ") #crear funci+on para valida clave
+        print(UserDTO().agregarUsuario(username, email,clave))
 
 def validateFindUser():
     username = input("Ingrese el nombre de usuario a buscar : ")
@@ -57,24 +83,7 @@ def validateUpdateUser():
 
     else:
         print("Usuario No encontrado")
-def validateAddUser():
-    # Pequeña validacio de ingreso de datos
-    username = input("Ingrese nombre de usuario a incorporar: ")
-    if len(username) == 0:
-        print("Debe ingresar un nombre de usuario")
-        return validateAddUser()
-    #trae un objeto usuario
-    resu = UserDTO().buscarUsuario(username)
-    if resu is not None:
-        """desplegamos el usuario, por medio de __str()__
-        de la clase Usuario, que se encuentra en el 
-        paquete modelo"""
-        print("Datos existentes--> ", resu)
-    else:
-        #Ingresamos el nuevo usuario
-        email = input("Ingrese email : ") #crear función para validar email
-        clave = input("Ingrese clave : ") #crear funci+on para valida clave
-        print(UserDTO().agregarUsuario(username, email,clave))
+        
 
 def validarLogin():
     username = input("Ingrese nombre de usuario : ")

@@ -27,7 +27,7 @@ def validarDisponible(disponible):
 
 def normalizarTexto(texto):
     return texto.strip().lower()
-# TODO: PROBAR
+
 def validarExistenciaHabitacion(numero):
     habitacion = HabitacionDTO().buscarHabitacion(numero)
     if habitacion is not None:

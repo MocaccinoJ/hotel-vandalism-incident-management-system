@@ -10,12 +10,12 @@ class UserDTO:
         usuarios = daouser.listarUsuarios()
         lista = []
         if usuarios is not None:
-            for usuario in usuarios:
+            for usuario_encontrado in usuarios:
                 usuario = User(
-                    username=usuario[0], 
-                    email=usuario[1], 
-                    password=usuario[2], 
-                    create_time=usuario[3]
+                    username=usuario_encontrado[0], 
+                    email=usuario_encontrado[1], 
+                    password=usuario_encontrado[2], 
+                    create_time=usuario_encontrado[3]
                 )
                 lista.append(usuario)
         return lista

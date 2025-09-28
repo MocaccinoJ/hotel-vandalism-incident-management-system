@@ -8,7 +8,7 @@ class User:
         self.__create_time = create_time
 
     def __str__(self):
-        return "{0} {1} {2}".format(self.getUsername(), self.getEmail(), self.getCreateTime())
+        return f"Username: {self.getUsername()}\nEmail: {self.getEmail()}\nCreado: {self.getCreateTime()}"
 
 #    GETERS
     def getUsername(self):
@@ -23,14 +23,14 @@ class User:
     def getCreateTime(self):
         return self.__create_time
 # SETTERS
-    # def setUsername(self, username):
-    #     self.__username = username
+    def setUsername(self, username):
+        self.__username = username
 
-    # def setEmail(self, email):
-    #     self.__email = email
+    def setEmail(self, email):
+        self.__email = email
 
-    # def setPassword(self, password):
-    #     self.__password = password
+    def setPassword(self, password):
+        self.__password = password
 
-    # def setCreateTime(self, createTime):
-    #     self.__create_time = createTime
+    def setCreateTime(self, createTime):
+        self.__create_time = createTime
