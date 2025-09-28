@@ -32,10 +32,10 @@ def validarExistenciaHabitacion(numero):
     habitacion = HabitacionDTO().buscarHabitacion(numero)
     if habitacion is not None:
         print("¡Habitación ya existe!")
-        return False
+        return habitacion
     else:
         print("¡Habitación no encontrado!")
-        return True
+        return None
 
 def confirmarAccion(mensaje="¿Desea continuar? (s/n): "):
     respuesta = input(mensaje).strip().lower()

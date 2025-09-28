@@ -18,11 +18,11 @@ def normalizarTexto(texto):
 def validarExistenciaCliente(documento):
     cliente = ClienteDTO().buscarCliente(documento)
     if cliente is not None:
-        print("¡Cliente encontrado!")
-        print(cliente)
-        return cliente
+        print("Cliente ya existe!")
+        clienteEncontrado = cliente
+        return clienteEncontrado
     else:
-        print("¡Cliente no encontrado!")
+        print("¡Cliente no existe!")
         return None
 
 def confirmarAccion(mensaje="¿Desea continuar? (s/n): "):

@@ -66,11 +66,9 @@ class daoEmpleado:
             cursor = c.getConex().cursor()
             cursor.execute(sql, (codigo))
             empleado = cursor.fetchone()
-
         except Exception as ex:
             print("¡Ha ocurrido un error! ", ex)
             traceback.print_exc()
-
         finally:
             self.getConex().closeConex()
         return empleado

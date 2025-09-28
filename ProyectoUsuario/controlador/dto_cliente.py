@@ -43,10 +43,16 @@ class ClienteDTO:
         return daoCliente().agregarCliente(cliente)
     
     def actualizarCliente(self, nombre, apellido, direccion, documento, tipoDocumento):
-        cliente = Cliente(nombre = nombre, apellido = apellido, direccion = direccion, documento = documento, tipoDocumento = tipoDocumento)
+        # Crear el objeto Cliente y aplicar los setters aquí
+        cliente = Cliente(documento=documento)
+        cliente.setNombre(nombre)
+        cliente.setApellido(apellido)
+        cliente.setDireccion(direccion)
+        cliente.setTipoDocumento(tipoDocumento)
+
+        # Mandar el objeto completo al DAO
         daocliente = daoCliente()
-        clienteActualizado=daocliente.actualizarCliente(cliente)
-        # print("CLIENTE ACTUALIZADO: ",clienteActualizado)
+        return daocliente.actualizarCliente(cliente)
 
     def eliminarCliente(self, documento):
         cliente = Cliente(documento=documento)

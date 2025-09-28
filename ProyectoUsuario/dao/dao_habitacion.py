@@ -57,14 +57,13 @@ class daoHabitacion:
         c = self.getConex()
         try:
             numero = habitacion.getNumero()
-
             cursor = c.getConex().cursor()
             cursor.execute(sql,(numero))
             habitacion = cursor.fetchone()
-
             return habitacion
         except Exception as ex:
             print("¡Ha ocurrido un error! ", ex)
+            print(traceback.print_exc())
             return None
         finally:
             c.closeConex()
@@ -72,7 +71,7 @@ class daoHabitacion:
     def actualizarHabitacion(self, habitacion):
         sql="""
             UPDATE habitacion
-            SET numero = %s, precio = %s, disponible = %s
+            SET precio = %s, disponible = %s
             WHERE numero = %s
         """
         c = self.getConex()
@@ -83,7 +82,7 @@ class daoHabitacion:
             disponible = habitacion.getDisponible()
             
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (numero, precio, disponible))
+            cursor.execute(sql, (precio, disponible, numero))
             c.getConex().commit()
 
             filas = cursor.rowcount

@@ -10,7 +10,7 @@ while intentos <= 3:
         
         inicializar_bd()
 
-        print("MENU: ")
+        print("-- MENU --")
         resu = validarLogin()
         if resu is not None:
             """TODO: ¡¡Saludar personalmente!!"""

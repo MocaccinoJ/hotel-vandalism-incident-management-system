@@ -17,7 +17,7 @@ class EmpleadoDTO:
                 )
                 lista.append(empleado_objeto)
         return lista
-
+# TODO: Probar buscar empleados
     def buscarEmpleado(self, codigo):
         daoempleado = daoEmpleado()
         codigo = Empleado(codigo = codigo)

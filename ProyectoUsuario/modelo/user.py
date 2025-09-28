@@ -1,14 +1,14 @@
 from datetime import datetime
 """TODO: Terminar el encapsulamiento"""
 class User:
-    def __init__(self, username, email="", password="", create_time=datetime.now()):
+    def __init__(self, username="", email="", password="", create_time=datetime.now()):
         self.__username = username
         self.__email = email
         self.__password = password
         self.__create_time = create_time
 
     def __str__(self):
-        return f"Username: {self.getUsername()}\nEmail: {self.getEmail()}\nCreado: {self.getCreateTime()}"
+        return f"Username: {self.getUsername()}\nEmail: {self.getEmail()}\n Password: {self.getPassword()}\nCreado: {self.getCreateTime()}"
 
 #    GETERS
     def getUsername(self):

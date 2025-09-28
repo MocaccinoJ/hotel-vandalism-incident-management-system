@@ -5,10 +5,10 @@ from validations.validationsCliente import validarNombre, validarDocumento, vali
 def listarClientes():
     clientesEncontrados = ClienteDTO().listarClientes()
     if len(clientesEncontrados) > 0:
+        print("-- Lista de Clientes --")
         for cliente in clientesEncontrados:
             print(cliente)
-        else:
-            print("¡No hay resultados!")
+            print(" ")
 def agregarCliente():
     #TODO: Agregar la validación de ingreso de datos y existencia de cliente
     try:
@@ -26,7 +26,7 @@ def agregarCliente():
         
         #todo: crear validación para documento del cliente API PKG
         documento = normalizarTexto(input("Ingrese el número de documento del cliente: "))
-        while not validarDocumento(documento): 
+        while not validarDocumento(documento) or validarExistenciaCliente(documento) is not None: 
             print("Ingrese un documento válido de 7 caracteres")
             documento = normalizarTexto(input("Ingrese el número de documento del cliente: "))
 
@@ -91,8 +91,6 @@ def actualizarCliente():
                 nuevoTipoDocumento = normalizarTexto(input("Ingrese el nuevo tipo de documento: "))
             tipoDocumento = nuevoTipoDocumento
         
-        #Enviar información al DTO
-        print("HOLA SI ENVIAR INFORMACION AL DTO")
         clienteActualizado = ClienteDTO().actualizarCliente(nombre, apellido, direccion, documento, tipoDocumento)
         if clienteActualizado:
             print("Cliente actualizado correctamente.")
@@ -105,10 +103,9 @@ def eliminarCliente():
     try:
         documento = normalizarTexto(input("Ingrese el número de documento del cliente que desea eliminar: "))
         while not validarDocumento(documento):
-            # TODO: Podría implementar un módulo de alertas automáticas.
             print("Documento inválido. Intente nuevamente.")
             documento = normalizarTexto(input("Ingrese el número de documento del cliente que desea eliminar: "))
-        cliente = ClienteDTO().buscarCliente(documento)
+        # cliente = ClienteDTO().buscarCliente(documento)
 
         cliente = validarExistenciaCliente(documento)
         if cliente is None:

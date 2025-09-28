@@ -58,9 +58,8 @@ class daoCliente:
         sql = "SELECT nombre, apellido, direccion, documento, tipoDocumento FROM cliente WHERE documento =%s"
         c = self.getConex()
         try:
-            documento = cliente.getDocumento()
             cursor = c.getConex().cursor()
-            cursor.execute(sql,(documento))
+            cursor.execute(sql,(cliente.getDocumento()))
             cliente = cursor.fetchone()
 
             return cliente

@@ -20,20 +20,29 @@ class UserDTO:
                 lista.append(usuario)
         return lista
 
-    def buscarUsuario(self, username):
+    def buscarUsuarioPorUsername(self, username):
         daouser = daoUser()
-        # username = User(username=username)
-        usuario = daouser.buscarUsuario(User(username=username))
-        # print('2) Estructura resultado!', resultado)
+        username = User(username=username)
+        usuario = daouser.buscarUsuarioPorUsername(username)
         if usuario is not None:
             usuario = User(
                 username = usuario[0],
                 email = usuario[1],
-                password = usuario[2],
-                create_time= usuario[3]
+                password= usuario[2]
             )
-            return usuario
-        return None
+        return usuario
+    
+    def buscarUsuarioPorEmail(self, email):
+        daouser = daoUser()
+        email = User(email=email)
+        usuario = daouser.buscarUsuarioPorEmail(email)
+        if usuario is not None:
+            usuario = User(
+                username = usuario[0],
+                email = usuario[1],
+                create_time= usuario[2]
+            )
+        return usuario
 
     def validarLogin(self, username, clave):
         try:
@@ -46,14 +55,25 @@ class UserDTO:
             print('!Ha ocurrido un error!: ', ex)
             return None
 
-    def actualizarUsuario(self, username, email, password):
+    # def actualizarUsuario(self, originalUsername, username, email, password):
+    #     print("DTO: Username: ", username, " Email: ", email, " Password: ", password  )
+    #     daouser = daoUser()
+    #     usuarioActualizado = daouser.actualizarUsuario(User(username=username, email=email, password=password), originalUsername)
+    #     return usuarioActualizado
+    def actualizarUsuario(self, originalUsername, username, email, password):
+        print("DTO: Username:", username, "Email:", email, "Password:", password)
         daouser = daoUser()
-        usuarioActualizado = daouser.actualizarUsuario(User(username=username, email=email, password=password))
+
+        user = User()                 # creas el objeto vacío
+        user.setUsername(username)    # usas setters
+        user.setEmail(email)
+        user.setPassword(password)
+
+        usuarioActualizado = daouser.actualizarUsuario(user, originalUsername)
         return usuarioActualizado
-    
+
     def eliminarUsuario(self, username):
         daouser = daoUser()
-        print("DTO USERNAME: ",username)
         usuarioEliminado = daouser.eliminarUsuario(User(username=username))
         return usuarioEliminado
     

@@ -8,17 +8,17 @@ def listarHabitaciones():
             numero = habitacion.getNumero()
             disponible = "Sí" if habitacion.getDisponible() else "No"
             precio = habitacion.getPrecio()
-            print("HABITACION ACCIONES:\n",
-                  f"Número: {numero}\n",
-                  f"Precio: {precio}\n",
-                  f"Disponible: {disponible}")
+            print(
+                f"Número: {numero}\n",
+                f"Precio: {precio}\n",
+                f"Disponible: {disponible}"
+            )
 
             
 def agregarHabitacion():
-    #TODO: Agregar la validación de ingreso de datos y existencia de habitación
     try:
         numero = input("Ingrese el número de la habitación: ")
-        while not validarNumero(numero) or not validarExistenciaHabitacion(numero):
+        while not validarNumero(numero) or validarExistenciaHabitacion(numero) is not None:
             print("Número inválido. Intente nuevamente")
             numero = input("Ingrese el nombre de la habitación: ")
 
@@ -32,7 +32,7 @@ def agregarHabitacion():
         while not validarDisponible(disponible):
             print("¡Ingrese valor válido!")
             disponible = normalizarTexto(input("Indique si la habitación está ocupada (s/n): "))
-        # Convertir valor ingresado a booleano para la base de datos
+        # Convertir valor ingresado a booleanoa para la base de datos
         disponible_bool = True if disponible == 's' else False
             
         # TODO: Mostrar mensaje de confirmación de agregado a la base de datos
@@ -53,7 +53,6 @@ def actualizarHabitacion():
         while not validarNumero(numero):
             print("Número inválido. Intente nuevamente.")
             numero = normalizarTexto(input("Ingrese el número de habitacion a modificar: ")) 
-        habitacion = HabitacionDTO().buscarHabitacion(numero)
 
         habitacion = validarExistenciaHabitacion(numero)
         if habitacion is None:
@@ -61,17 +60,6 @@ def actualizarHabitacion():
         
         # Datos actuales de la habitación
         print(habitacion)
-
-        # Actualización condicional de cada campo
-        # Validar si el número de habitación ya existe
-        numero = habitacion.getNumero()
-        mensaje = "¿Desea modificar el número de habitación? (s/n): "
-        if confirmarAccion(mensaje):
-            nuevoNumero = input("Ingrese el nuevo Número: ")
-            while not validarNumero(nuevoNumero):
-                print("Nombre inválido. Intente nuevamente.")
-                nuevoNumero = normalizarTexto(input("Ingrese el nuevo nombre: "))
-            numero = nuevoNumero
         
         precio = habitacion.getPrecio()
         if confirmarAccion("¿Desea modificar el Precio? (s/n): "):
@@ -80,8 +68,9 @@ def actualizarHabitacion():
                 print("Precio inválido. Intente nuevamente.")
                 nuevoPrecio = input("Ingrese el nuevo apellido: ")
             precio = nuevoPrecio
-        # TODO: que el usuario ingrese s/n y se envíe un verdadero si es s y un falso si es n
+    
         disponible = habitacion.getDisponible()
+        disponible_bool = disponible
         if confirmarAccion("¿Desea modificar si está disponible? (s/n): "):
             nuevoDisponible = normalizarTexto(input("Ingrese el nuevo estado de disponibilidad: "))
             while not validarDisponible(nuevoDisponible):
@@ -91,9 +80,6 @@ def actualizarHabitacion():
             # Convertir valor ingresado a booleano para la base de datos
             disponible_bool = True if disponible == 's' else False
             
-        #Enviar información al DTO
-        # TODO: Eliminar print
-        print("HOLA SI ENVIAR INFORMACION AL DTO")
         habitacionActualizada = HabitacionDTO().actualizarHabitacion(numero, precio, disponible_bool)
         if habitacionActualizada:
             print("Habitación actualizada correctamente.")
@@ -106,7 +92,6 @@ def eliminarHabitacion():
     try:
         numero = input("Ingrese el número de habitación que desea eliminar: ")
         while not validarNumero(numero):
-            # TODO: Podría implementar un módulo de alertas automáticas.
             print("Número inválido. Intente nuevamente.")
             numero = input("Ingrese el número de habitación que desea eliminar: ")
         habitacion = HabitacionDTO().buscarHabitacion(numero)

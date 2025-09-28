@@ -40,12 +40,10 @@ class HabitacionDTO:
     def actualizarHabitacion(self, numero, precio, disponible):
         habitacion = Habitacion(numero = numero, precio = precio, disponible = disponible)
         daohabitacion = daoHabitacion()
-        habitacionActualizada=daohabitacion.actualizarHabitacion(habitacion)
+        return daohabitacion.actualizarHabitacion(habitacion)
 
     def eliminarHabitacion(self, numero):
         habitacion = Habitacion(numero = numero)
         daohabitacion = daoHabitacion()
-        
         habitacionEliminada = daohabitacion.eliminarHabitacion(habitacion)
-        
         return habitacionEliminada

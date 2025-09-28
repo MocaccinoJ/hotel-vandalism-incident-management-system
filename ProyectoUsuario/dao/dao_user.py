@@ -24,23 +24,39 @@ class daoUser:
             c.closeConex()
         return result
 
-    def buscarUsuario(self, user):
+    def buscarUsuarioPorUsername(self, user):
         sql = "SELECT username, email, password, create_time FROM user WHERE username = %s"
-        resultado = None
+        usuario = None
+        c = self.getConex()
+        try:
+            print(user.getUsername())
+            cursor = c.getConex().cursor()
+            cursor.execute(sql, (user.getUsername(),))
+            usuario = cursor.fetchone()
+            return usuario
+        except Exception as ex:
+            print("¡Ha ocurrido un error! ",ex)
+            print(traceback.print_exc())
+            return None
+        finally:
+            c.closeConex()
+    
+    def buscarUsuarioPorEmail(self, user):
+        sql = "SELECT username, email, password, create_time FROM user WHERE email = %s"
+        usuario = None
         c = self.getConex()
 
         try:
-            username = user.getUsername()
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (username,))
-            resultado = cursor.fetchone()
-
+            cursor.execute(sql, (user.getEmail(),))
+            usuario = cursor.fetchone()
         except Exception as ex:
             print("¡Ha ocurrido un error! ",ex)
             print(traceback.print_exc())
         finally:
             c.closeConex()
-        return resultado
+        return usuario
+
 
     def validarLogin(self,user):
         sql = "SELECT username FROM user WHERE username = %s AND password = %s"
@@ -59,17 +75,19 @@ class daoUser:
             conn.closeConex()
         return resultado
     
-    def actualizarUsuario(self, user):
-        sql = "UPDATE user SET email=%s, password = %s WHERE username = %s"
+    def actualizarUsuario(self, user, orginalUsername):
+        sql = "UPDATE user SET username=%s, email=%s, password=%s WHERE username = %s"
         c = self.getConex()
         mensaje = ""
         try:
-            email = user.getEmail()
-            password = password.getPassword()
-            username = user.getUsername()
 
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (email, password, username))
+            cursor.execute(sql, (
+                user.getUsername(), 
+                user.getEmail(),
+                user.getPassword(), 
+                orginalUsername
+            ))
             c.getConex().commit()
             filas = cursor.rowcount
 
@@ -93,9 +111,9 @@ class daoUser:
             
         try:
             username = user.getUsername()
-            print("Username recibido:", repr(username))  # Para verificar espacios
+
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (username,))  # ← CORREGIDO
+            cursor.execute(sql, (username,))
             c.getConex().commit()
 
             filas = cursor.rowcount

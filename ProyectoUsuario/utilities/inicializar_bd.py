@@ -90,8 +90,8 @@ def inicializar_bd():
             cursor.executemany("""
                 INSERT INTO cliente (documento,nombre,apellido,direccion,tipoDocumento) VALUES (%s,%s,%s,%s,%s)
             """, [
-                ("1001","Pepe","López","Calle Real 12","RUT"),
-                ("1002","Ana","Martínez","Avenida Central 45","Pasaporte")
+                ("1000001","Pepe","López","Calle Real 12","RUT"),
+                ("1000002","Ana","Martínez","Avenida Central 45","Pasaporte")
             ])
 
         # Insertar habitaciones iniciales (ahora 5 habitaciones)

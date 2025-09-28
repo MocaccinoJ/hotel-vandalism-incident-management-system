@@ -2,7 +2,7 @@ from modelo.persona import Persona
 
 
 class Cliente(Persona):
-    def init(
+    def __init__(
             self, 
             nombre="", 
             apellido="", 
@@ -14,7 +14,7 @@ class Cliente(Persona):
         self.__documento = documento
         self.__tipoDocumento = tipoDocumento
 
-    def str(self):
+    def __str__(self):
         return f"Nombre: {self.getNombre()} \nApellido: {self.getApellido()} \nDirección: {self.getDireccion()} \nDocumento: {self.getDocumento()} \nTipo Documento: {self.getTipoDocumento()}"
 
     # Getters

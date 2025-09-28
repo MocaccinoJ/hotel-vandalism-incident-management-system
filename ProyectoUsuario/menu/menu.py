@@ -1,4 +1,4 @@
-from acciones.accionesUsuario import listarUsuarios, agregarUsuario, validaDelUser, validateUpdateUser, validateFindUser
+from acciones.accionesUsuario import listarUsuarios, agregarUsuario, editarUsuario, buscarUsuario, eliminarUsuario
 from acciones.accionesCliente import listarClientes, agregarCliente, actualizarCliente, eliminarCliente
 from acciones.accionesHabitacion import listarHabitaciones, agregarHabitacion, actualizarHabitacion, eliminarHabitacion
 from acciones.accionesEmpleado import listarEmpleados, agregarEmpleado, actualizarEmpleado, eliminarEmpleado
@@ -15,11 +15,11 @@ def inicial():
         elif opc == 2:
             agregarUsuario()
         elif opc == 3:
-            validaDelUser()
+            eliminarUsuario()
         elif opc == 4:
-            validateUpdateUser()
+            editarUsuario()
         elif opc == 5:
-            validateFindUser()
+            buscarUsuario()
 
         elif opc == 101:
             listarClientes()
