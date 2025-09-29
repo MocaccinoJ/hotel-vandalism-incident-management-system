@@ -15,6 +15,7 @@ def validateEncriptaPassword (password):
         else:
             print("La contraseña no puede estar vacía. Intente nuevamente.")
 # TODO:Implementar bien el modulo de validacion
+# def checkPassword(password):
 
 # TODO: Cambiar la lógica
 def validarEmail(email):

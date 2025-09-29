@@ -103,22 +103,6 @@ def editarUsuario():
     except Exception as ex:
         print("¡Ha ocurrido un error!", ex)
 
-# def validaDelUser():
-#     username = input("Ingrese el nombre de usuario a eliminar : ")
-#     if len(username) == 0:
-#         print("Debe ingresar un nombre de usuario")
-#         return validaDelUser()
-#     #trae devuelta un objeto User
-#     resu = UserDTO().buscarUsuario(username)
-#     if resu is not None:
-#         print("Datos --> ", resu)
-#         respuesta = input("Esta seguro de la eliminación [s/n]: ") #crear función para validar respuesta
-#         if respuesta == "s":
-#             print("Ay: ",UserDTO().eliminarUsuario(resu.getUsername()))
-
-#     else:
-#         print("Usuario No encontrado")
-
 def eliminarUsuario():
     try:
         username = normalizarTexto(input("¡Ingrese el username del usuario que desea eliminar!: "))
@@ -137,6 +121,10 @@ def eliminarUsuario():
 def validarLogin():
     username = input("Ingrese nombre de usuario : ")
     clave = input("Ingrese contraseña : ")
+    
     resultado = UserDTO().validarLogin(username, clave)
-    print("RESULTADO: validarLogin() | ",resultado)
+    if resultado is not None:
+        print(f"¡Login exitoso! Bienvenido {resultado.getUsername()}")
+    else:
+        print("Usuario o contraseña incorrecta")
     return resultado

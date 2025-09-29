@@ -1,5 +1,6 @@
 from conex import conn
 from datetime import datetime
+from seguridad.strategyEncryptor import encriptarPassword
 
 def inicializar_bd():
     c = conn.Conex("localhost", "root", "", "superbase")
@@ -70,7 +71,7 @@ def inicializar_bd():
             cursor.executemany("""
                 INSERT INTO user (username, email, password, create_time) VALUES (%s, %s, %s, %s)
             """, [
-                ("admin", "admin@hotel.com", "admin123", datetime.now()),
+                ("admin", "admin@hotel.com", encriptarPassword("admin123"), datetime.now()),
                 ("guest", "guest@hotel.com", "guest123", datetime.now())
             ])
 
@@ -114,8 +115,8 @@ def inicializar_bd():
                 INSERT INTO reserva (numReserva, fechaLlegada, fechaSalida, costoTotal, documentoCliente, codigoEmpleado, numeroHabitacion)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
             """, [
-                (1, "2025-10-01", "2025-10-05", 200000, "1001", "1", 101),
-                (2, "2025-10-10", "2025-10-15", 300000, "1002", "2", 102)
+                (1, "2025-10-01", "2025-10-05", 200000, "1000001", "1", 101),
+                (2, "2025-10-10", "2025-10-15", 300000, "1000002", "2", 102)
             ])
 
         c.getConex().commit()

@@ -58,22 +58,20 @@ class daoUser:
         return usuario
 
 
-    def validarLogin(self,user):
-        sql = "SELECT username FROM user WHERE username = %s AND password = %s"
-        resultado = None
+    def validarLogin(self, user):
+        sql = "SELECT username, password FROM user WHERE username = %s"
+        usuario = None
         conn = self.getConex()
         try:
-            # TODO: Mètodo para encriptar y comparar contraseña encriptada
             cursor = conn.getConex().cursor()
-            cursor.execute(sql, (user.getUsername(), user.getPassword()))
-            resultado = cursor.fetchone()
-
+            cursor.execute(sql, (user.getUsername(),))  # <- Solo username, nota la coma
+            usuario = cursor.fetchone()
         except Exception as ex:
-            print("¡Ha ocurrido un error! ",ex)
+            print("¡Ha ocurrido un error! ", ex)
             print(traceback.print_exc())
         finally:
             conn.closeConex()
-        return resultado
+        return usuario
     
     def actualizarUsuario(self, user, orginalUsername):
         sql = "UPDATE user SET username=%s, email=%s, password=%s WHERE username = %s"
